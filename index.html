@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaxial Arquitectos Asociados | Estudio de Arquitectura</title>
+    <style>
+        /* ==========================================================================
+           PALETA DE COLORES & TIPOGRAFÍA (Inspiración Cinematic Moody & 30x40)
+           ========================================================================== */
+        :root {
+            --bg-color: #f7f6f4;        /* Fondo claro, cálido, mate (tipo papel texturizado) */
+            --text-main: #1c232b;       /* Azul marino oscuro/pizarra profundo para textos principales */
+            --text-muted: #526273;      /* Azul grisáceo medio para textos secundarios y cuerpo */
+            --accent: #2c3e50;          /* Tono estructural oscuro */
+            --border-color: #d1d8df;    /* Líneas de unión sutiles */
+            --card-bg: #ecebe8;         /* Fondo de contenedores vacíos para imágenes */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;    /* Desplazamiento suave entre secciones */
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Tipografía limpia, espaciada y técnica estilo taller 30x40 */
+        h1, h2, h3, .logo, nav a, .project-meta, label {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ==========================================================================
+           NAVEGACIÓN / HEADER
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background-color: rgba(247, 246, 244, 0.96);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 60px;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+        }
+
+        .logo span {
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+
+        nav a {
+            margin-left: 35px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           ESTRUCTURA DE CONTENEDORES
+           ========================================================================== */
+        section {
+            padding: 160px 60px 100px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            color: var(--text-main);
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--text-main);
+            width: 100%;
+        }
+
+        /* ==========================================================================
+           SECCIÓN 1: ESTUDIO (PRESENTACIÓN)
+           ========================================================================== */
+        .studio-container {
+            max-width: 900px;
+        }
+
+        .studio-container h1 {
+            font-size: 2.2rem;
+            line-height: 1.4;
+            color: var(--text-main);
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            text-transform: none; 
+            font-family: "Times New Roman", Times, serif; /* Contraste elegante editorial */
+            font-style: italic;
+        }
+
+        .manifiesto-tag {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .studio-content p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .studio-content p strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           SECCIÓN 2: PORTAFOLIO (PROYECTOS)
+           ========================================================================== */
+            .grid-proyectos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Fuerza exactamente 3 columnas por fila */
+            gap: 30px; /* Espacio limpio entre cada proyecto */
+            margin-top: 40px;
+        }
+
+        .proyecto-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .imagen-placeholder {
+            width: 100%;
+            height: 500px;
+            background-color: var(--card-bg);
+            border: 1px dashed var(--text-muted);
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.4s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .proyecto-card:hover .imagen-placeholder {
+            background-color: #e2e1de;
+        }
+
+        /* Guías técnicas visuales tipo plano arquitectónico */
+        .imagen-placeholder::before, .imagen-placeholder::after {
+            content: '';
+            position: absolute;
+            background: rgba(82, 98, 115, 0.15);
+        }
+        .imagen-placeholder::before { top: 0; left: 50%; width: 1px; height: 100%; }
+        .imagen-placeholder::after { top: 50%; left: 0; width: 100%; height: 1px; }
+
+        .placeholder-text {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            z-index: 1;
+        }
+
+        .project-meta {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.8rem;
+            border-bottom: 1px solid rgba(82, 98, 115, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .project-title {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .project-year {
+            color: var(--text-muted);
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        /* ==========================================================================
+           SECCIÓN 3: CONTACTO & REDES
+           ========================================================================== */
+        .contacto-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contacto-info h3 {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .contacto-info p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 450px;
+        }
+
+        .canales-difusion {
+            margin-top: 50px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+        }
+
+        .social-link {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--text-muted);
+            transform: translateX(5px);
+        }
+
+        /* Formulario técnico y limpio */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        input, textarea {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--text-muted);
+            padding: 10px 0;
+            font-size: 1rem;
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            border: none;
+            padding: 18px 40px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--text-muted);
+        }
+
+        footer {
+            padding: 40px 60px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            letter-spacing: 1px;
+        }
+
+        /* Ajustes para dispositivos móviles */
+        @media (max-width: 900px) {
+            header { padding: 20px 30px; }
+            section { padding: 120px 30px 60px 30px; }
+            .contacto-wrapper { grid-template-columns: 1fr; gap: 50px; }
+            .grid-proyectos { grid-template-columns: 1fr; }
+            .studio-container h1 { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Spaxial <span>Arquitectos Asociados</span></div>
+        <nav>
+            <a href="#estudio">Estudio</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="estudio">
+            <div class="studio-container">
+                <span class="manifiesto-tag">Manifiesto Filosófico</span>
+                <h1>“Simple pero no humilde; hermosa pero no extravagante”</h1>
+                
+                <div class="studio-content">
+                    <p>
+                        Spaxial Arquitectos Asociados es un estudio de arquitectura enfocado en la síntesis formal, la honestidad material y la disección del espacio doméstico. Nos especializamos en viviendas privadas y proyectos multifamiliares que destacan por su optimización espacial.
+                    </p>
+                    <p>
+                        Nuestras propuestas rechazan la espectacularidad vacía para concentrarse en la resolución limpia de volúmenes, la fluidez de las plantas y la integración de iluminación cenital y ventilación. Cada encargo es una investigación única donde el dibujo a mano y el análisis crítico guían nuestro proceso de diseño.
+                    </p>
+                    <p>
+                        Más allá del taller, Spaxial funciona como una plataforma de difusión y educación arquitectónica. A través de canales visuales y nuestra serie <strong>"Lectura de Viviendas"</strong>, compartimos de forma abierta nuestro método de análisis y el proceso real detrás de cada proyecto. Al documentar el oficio —desde el croquis inicial hasta el detalle constructivo—, conectamos con una comunidad global interesada en la esencia del espacio habitable.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyectos">
+            <h2>Proyectos Realizados</h2>
+
+            <a href="edificio-1307.html" class="proyecto-card">
+                    <div class="imagen-placeholder">
+                        <img src="Proyecto-1307-1.jpg" alt="Edificio 1307" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-title">Edificio 1307</span>
+                        <span class="project-year">2026</span>
+                    </div>
+                </a>
+            
+                  <a href="casa-felipe.html" class="proyecto-card">
+                    <div class="imagen-placeholder">
+                        <img src="Casa-felipe-1.jpg" alt="Casa Felipe" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-title">Casa Felipe</span>
+                        <span class="project-year">2026</span>
+                    </div>
+                </a>
+
+                <!-- Tarjeta de Proyecto: Villa Pacífico -->
+        <a href="villa-pacifico.html" class="proyecto-card">
+            <div class="imagen-placeholder">
+                <img src="villa-pacifico-1.jpg" alt="Villa Pacífico" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="project-meta">
+                <span class="project-title">Villa Pacífico</span>
+                <span class="project-year">2026</span>
+            </div>
+        </a>
+
+       <a href="biblioteca.html" class="proyecto-card">
+                    <div class="imagen-placeholder">
+                        <img src="Biblioteca-1.jpg" alt="Biblioteca Municipal" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-title">Biblioteca Municipal</span>
+                        <span class="project-year">2026</span>
+                    </div>
+                </a>
+
+       <a href="edificio-A10.html" class="proyecto-card">
+                    <div class="imagen-placeholder">
+                        <img src="Edificio-A10-1.jpg" alt="Edificio A10" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-title">Edificio A10</span>
+                        <span class="project-year">2026</span>
+                    </div>
+                </a>
+
+        <a href="matices.html" class="proyecto-card">
+                    <div class="imagen-placeholder">
+                        <img src="Matices-1.jpg" alt="Proyecto Matices" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-title">Proyecto Matices</span>
+                        <span class="project-year">2026</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+
+        <section id="contacto">
+            <h2>Contacto</h2>
+            
+            <div class="contacto-wrapper">
+                <div class="contacto-info">
+                    <h3>¿Tienes un proyecto en mente?</h3>
+                    <p>
+                        Diseñamos espacios basados en la honestidad y la síntesis. Escríbenos para agendar una sesión de revisión o consultoría en el taller.
+                    </p>
+                    
+                 <div class="canales-difusion">
+                <h3>Plataforma de Difusión</h3>
+                <a href="https://youtube.com/@spaxial.studio?si=HtfSpPATR52Q_QX3" class="social-link" target="_blank">→ YouTube</a>
+                <a href="https://www.instagram.com/spaxial_arquitectos_asociados?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link" target="_blank">→ Instagram</a>
+                <a href="https://www.facebook.com/spaxialarquitectosasociados" class="social-link" target="_blank">→ Facebook</a>
+            </div>
+
+                <div class="contacto-formulario">
+                    <form action="https://formsubmit.co/spaxial.estudio@gmail.com" method="POST">
+                        
+                        <input type="hidden" name="_captcha" value="false">
+
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo / Firma</label>
+                            <input type="text" id="nombre" name="Nombre" required placeholder="Ej. Juan Pérez">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico de Contacto</label>
+                            <input type="email" id="email" name="Correo" required placeholder="ejemplo@correo.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono">Teléfono / WhatsApp (Opcional)</label>
+                            <input type="tel" id="telefono" name="Telefono" placeholder="+51 999 999 999">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">Descripción Breve del Encargo o Idea</label>
+                            <textarea id="mensaje" name="Mensaje" required placeholder="Cuéntanos sobre el terreno o la visión espacial..."></textarea>
+                        </div>
+
+                        <button type="submit">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Spaxial Arquitectos Asociados. Arquitectura basada en la síntesis y la honestidad material.</p>
+    </footer>
+
+</body>
+</html>
