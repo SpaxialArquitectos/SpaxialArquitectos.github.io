@@ -145,7 +145,7 @@
         /* ==========================================================================
            SECCIÓN 2: PORTAFOLIO (PROYECTOS)
            ========================================================================== */
-            .grid-proyectos {
+        .grid-proyectos {
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* Fuerza exactamente 3 columnas por fila */
             gap: 30px; /* Espacio limpio entre cada proyecto */
@@ -210,6 +210,67 @@
         .project-year {
             color: var(--text-muted);
             font-family: "Courier New", Courier, monospace;
+        }
+
+        /* ==========================================================================
+           SECCIÓN NUEVA: DIVULGACIÓN / YOUTUBE
+           ========================================================================== */
+        .youtube-intro {
+            max-width: 800px;
+            margin-bottom: 40px;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        .grid-analisis {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .analisis-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 380px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.4s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .analisis-card:hover .video-placeholder {
+            background-color: #e2e1de;
+        }
+
+        /* Botón de reproducción técnico minimalista */
+        .play-button-svg {
+            width: 50px;
+            height: 50px;
+            fill: none;
+            stroke: var(--text-main);
+            stroke-width: 1;
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+
+        .analisis-card:hover .play-button-svg {
+            transform: scale(1.1);
+        }
+
+        .youtube-btn-container {
+            margin-top: 50px;
+            align-self: flex-start;
         }
 
         /* ==========================================================================
@@ -295,7 +356,7 @@
             min-height: 100px;
         }
 
-        button {
+        button, .btn-link {
             background-color: var(--text-main);
             color: var(--bg-color);
             border: none;
@@ -306,9 +367,11 @@
             cursor: pointer;
             align-self: flex-start;
             transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        button:hover {
+        button:hover, .btn-link:hover {
             background-color: var(--text-muted);
         }
 
@@ -327,6 +390,8 @@
             section { padding: 120px 30px 60px 30px; }
             .contacto-wrapper { grid-template-columns: 1fr; gap: 50px; }
             .grid-proyectos { grid-template-columns: 1fr; }
+            .grid-analisis { grid-template-columns: 1fr; gap: 30px; }
+            .video-placeholder { height: 240px; }
             .studio-container h1 { font-size: 1.7rem; }
         }
     </style>
@@ -338,11 +403,13 @@
         <nav>
             <a href="#estudio">Estudio</a>
             <a href="#proyectos">Proyectos</a>
+            <a href="#divulgacion">Divulgación</a>
             <a href="#contacto">Contacto</a>
         </nav>
     </header>
 
     <main>
+        <!-- SECCIÓN 1: ESTUDIO -->
         <section id="estudio">
             <div class="studio-container">
                 <span class="manifiesto-tag">Manifiesto Filosófico</span>
@@ -353,19 +420,21 @@
                         Spaxial Arquitectos Asociados es un estudio de arquitectura enfocado en la síntesis formal, la honestidad material y la disección crítica del espacio doméstico. Nuestra práctica encuentra su máxima expresión en el desarrollo de viviendas unifamiliares integradas en entornos rurales y periféricos, concebidas desde un profundo respeto por el paisaje. Estructuramos el espacio a través de la tectónica de elementos nobles y atemporales: la solidez de la piedra, la calidez de la tierra, el respeto por la vegetación preexistente y la captura precisa de la luz natural.
                     </p>
                     <p>
-                        Frente a las rigideces y limitaciones de diseño impuestas por el mercado inmobiliario actual en los desarrollos multifamiliares con los cuales dialogamos desde una estricta optimización funcional y sutil, el taller decide concentrar su investigación en proyectos que permitan una verdadera fluidez espacial y una conexión honesta con la naturaleza. Cada encargo es abordado como un ensayo único donde el croquis a mano alzada, la geometría limpia y el análisis técnico guían el proceso hacia una arquitectura esencial y de permanencia.
+                        Frente a las rigideces y limitations de diseño impuestas por el mercado inmobiliario actual en los desarrollos multifamiliares con los cuales dialogamos desde una estricta optimización funcional y sutil, el taller decide concentrar su investigación en proyectos que permitan una verdadera fluidez espacial y una conexión honesta con la naturaleza. Cada encargo es abordado como un ensayo único donde el croquis a mano alzada, la geometría limpia y el análisis técnico guían el proceso hacia una arquitectura esencial y de permanencia.
                     </p>
                     <p>
-                        Paralelamente a la actividad proyectual, Spaxial opera como un nodo de difusión y pedagogía arquitectónica. A través de plataformas audiovisuales especializadas, documentamos y compartimos el oficio constructivo desde su génesis conceptual hasta el detalle de obra. Este registro riguroso de nuestra metodología de diseño nos permite consolidar una comunidad alineada con la esencia del espacio habitable, el rigor de la construcción y el respeto por el territorio
+                        Paralelamente a la actividad proyectual, Spaxial opera como un nodo de difusión y pedagogía arquitectónica. A través de plataformas audiovisuales especializadas, documentamos y compartimos el oficio constructivo desde su génesis conceptual hasta el detalle de obra. Este registro riguroso de nuestra metodología de diseño nos permite consolidar una comunidad alineada con la esencia del espacio habitable, el rigor de la construcción y el respeto por el territorio.
                     </p>
                 </div>
             </div>
         </section>
 
+        <!-- SECCIÓN 2: PORTAFOLIO (PROYECTOS) -->
         <section id="proyectos">
             <h2>Proyectos Realizados</h2>
 
-            <a href="edificio-1307.html" class="proyecto-card">
+            <div class="grid-proyectos">
+                <a href="edificio-1307.html" class="proyecto-card">
                     <div class="imagen-placeholder">
                         <img src="edificio-1307-1.jpg" alt="edificio 1307" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
@@ -374,8 +443,20 @@
                         <span class="project-year">2026</span>
                     </div>
                 </a>
-            
-                  <a href="casa-felipe.html" class="proyecto-card">
+
+                <!-- Tarjeta de Proyecto: L+W -->
+                <a href="departamento-L+W.html" class="proyecto-card">
+                    <div class="imagen-placeholder">
+                        <img src="departamento-L+W-1.jpg" alt="Departamento L+W" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-title">Departamento L+W</span>
+                        <span class="project-year">2026</span>
+                    </div>
+                </a>
+                
+                <!-- Tarjeta de Proyecto: Casa Felipe -->
+                <a href="casa-felipe.html" class="proyecto-card">
                     <div class="imagen-placeholder">
                         <img src="Casa-felipe-1.jpg" alt="Casa Felipe" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
@@ -385,18 +466,30 @@
                     </div>
                 </a>
 
-                <!-- Tarjeta de Proyecto: Villa Pacífico -->
-        <a href="villa-pacifico.html" class="proyecto-card">
-            <div class="imagen-placeholder">
-                <img src="villa-pacifico-1.jpg" alt="Villa Pacífico" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div class="project-meta">
-                <span class="project-title">Villa Pacífico</span>
-                <span class="project-year">2026</span>
-            </div>
-        </a>
+                <!-- Tarjeta de Proyecto: Casa la Colpa -->
+                <a href="casa-la-colpa.html" class="proyecto-card">
+                    <div class="imagen-placeholder">
+                        <img src="casa-la-colpa-1.jpg" alt="Casa la Colpa" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-title">Casa la Colpa</span>
+                        <span class="project-year">2026</span>
+                    </div>
+                </a>
 
-       <a href="biblioteca.html" class="proyecto-card">
+                <!-- Tarjeta de Proyecto: Villa Pacífico -->
+                <a href="villa-pacifico.html" class="proyecto-card">
+                    <div class="imagen-placeholder">
+                        <img src="villa-pacifico-1.jpg" alt="Villa Pacífico" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-title">Villa Pacífico</span>
+                        <span class="project-year">2026</span>
+                    </div>
+                </a>
+
+                <!-- Tarjeta de Proyecto: Biblioteca Municipal -->
+                <a href="biblioteca.html" class="proyecto-card">
                     <div class="imagen-placeholder">
                         <img src="biblioteca-1.jpg" alt="biblioteca Municipal" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
@@ -406,7 +499,8 @@
                     </div>
                 </a>
 
-       <a href="edificio-a10.html" class="proyecto-card">
+                <!-- Tarjeta de Proyecto: Edificio A10 -->
+                <a href="edificio-a10.html" class="proyecto-card">
                     <div class="imagen-placeholder">
                         <img src="edificio-a10-1.jpg" alt="Edificio A10" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
@@ -416,7 +510,8 @@
                     </div>
                 </a>
 
-        <a href="matices.html" class="proyecto-card">
+                <!-- Tarjeta de Proyecto: Proyecto Matices -->
+                <a href="matices.html" class="proyecto-card">
                     <div class="imagen-placeholder">
                         <img src="Matices-1.jpg" alt="Proyecto Matices" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
@@ -425,11 +520,58 @@
                         <span class="project-year">2026</span>
                     </div>
                 </a>
-
             </div>
         </section>
 
+        <!-- SECCIÓN NUEVA: DIVULGACIÓN / LECTURA DE VIVIENDAS -->
+        <!-- SECCIÓN NUEVA: DIVULGACIÓN / LECTURA DE VIVIENDAS -->
+<section id="divulgacion">
+    <h2>Lectura de Viviendas & Difusión</h2>
+    <p class="youtube-intro">
+        Entendemos el audiovisual como una extensión del propio tablero de dibujo. A través de nuestro canal de YouTube, desmontamos, analizamos y redibujamos obras de referencia y bitácoras de taller, compartiendo los procesos técnicos detrás de cada resolución espacial.
+    </p>
 
+    <div class="grid-analisis">
+        <!-- Video 1: Lectura de Viviendas -->
+        <a href="https://www.youtube.com/embed/IkY78b-lsjs?si=L_tH-CTFiivWuKUH" class="analisis-card video-popup">
+            <div class="video-placeholder">
+                <!-- SVG de icono Play minimalista -->
+                <svg class="play-button-svg" viewBox="0 0 24 24">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <!-- Reemplazar "mini-lecturas.jpg" por la miniatura de tus análisis -->
+                <img src="miniatura-electricidad.jpg" alt="Serie Lectura de Viviendas" style="position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+            </div>
+            <div class="project-meta">
+                <span class="project-title">Serie: Lectura de Viviendas (Análisis Crítico)</span>
+                <span class="project-year">Video Ensayo</span>
+            </div>
+        </a>
+
+
+
+        <!-- Video 2: Bitácora de Taller -->
+        <a href="https://www.youtube.com/embed/IkY78b-lsjs?si=L_tH-CTFiivWuKUH" class="analisis-card video-popup">
+            <div class="video-placeholder">
+                <svg class="play-button-svg" viewBox="0 0 24 24">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <!-- Reemplazar "mini-bitacora.jpg" por tu miniatura de procesos/vlogs -->
+                <img src="mini-bitacora.jpg" alt="Detalle de diseño y taller" style="position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+            </div>
+            <div class="project-meta">
+                <span class="project-title">Resolución Espacial: Luz Zenital y Tectónica</span>
+                <span class="project-year">Bitácora de Obra</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="youtube-btn-container">
+        <a href="https://youtube.com/@spaxial.studio?si=HtfSpPATR52Q_QX3" class="btn-link" target="_blank">Ver Canal de YouTube</a>
+    </div>
+</section>
+
+        <!-- SECCIÓN 3: CONTACTO -->
         <section id="contacto">
             <h2>Contacto</h2>
             
@@ -440,12 +582,13 @@
                         Diseñamos espacios basados en la honestidad y la síntesis. Escríbenos para agendar una sesión de revisión o consultoría en el taller.
                     </p>
                     
-                 <div class="canales-difusion">
-                <h3>Plataforma de Difusión</h3>
-                <a href="https://youtube.com/@spaxial.studio?si=HtfSpPATR52Q_QX3" class="social-link" target="_blank">→ YouTube</a>
-                <a href="https://www.instagram.com/spaxial_arquitectos_asociados?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link" target="_blank">→ Instagram</a>
-                <a href="https://www.facebook.com/spaxialarquitectosasociados" class="social-link" target="_blank">→ Facebook</a>
-            </div>
+                    <div class="canales-difusion">
+                        <h3>Plataforma de Difusión</h3>
+                        <a href="https://youtube.com/@spaxial.studio?si=HtfSpPATR52Q_QX3" class="social-link" target="_blank">→ YouTube</a>
+                        <a href="https://www.instagram.com/spaxial_arquitectos_asociados?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link" target="_blank">→ Instagram</a>
+                        <a href="https://www.facebook.com/spaxialarquitectosasociados" class="social-link" target="_blank">→ Facebook</a>
+                    </div>
+                </div>
 
                 <div class="contacto-formulario">
                     <form action="https://formsubmit.co/spaxial.estudio@gmail.com" method="POST">
@@ -482,6 +625,62 @@
     <footer>
         <p>&copy; 2026 Spaxial Arquitectos Asociados. Arquitectura basada en la síntesis y la honestidad material.</p>
     </footer>
+
+
+<div id="videoLightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(20,24,30,0.95); z-index:9999; justify-content:center; align-items:center; backdrop-filter: blur(8px);">
+    <span id="closeLightbox" style="position:absolute; top:40px; right:60px; color:#f7f6f4; font-size:0.9rem; font-family:monospace; cursor:pointer; letter-spacing:3px;">[ CERRAR ]</span>
+    
+    <div style="width:85%; max-width:1000px; aspect-ratio:16/9; background:#000; box-shadow:0 30px 100px rgba(0,0,0,0.8);">
+        <iframe id="lightboxPlayer" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const videoCards = document.querySelectorAll('.video-popup');
+        const lightbox = document.getElementById('videoLightbox');
+        const player = document.getElementById('lightboxPlayer');
+        const closeBtn = document.getElementById('closeLightbox');
+
+        videoCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                let videoUrl = this.getAttribute('href');
+                
+                // Limpiamos los parámetros de origen
+                if (videoUrl.includes('?')) {
+                    videoUrl = videoUrl.split('?')[0];
+                }
+                
+                // Añadimos enablejsapi=1 para saltar las restricciones locales del navegador
+                player.src = videoUrl + "?autoplay=1&enablejsapi=1&rel=0&modestbranding=1"; 
+                lightbox.style.display = 'flex';
+            });
+        });
+
+        function closeVideo() {
+            lightbox.style.display = 'none';
+            player.src = ""; 
+        }
+
+        closeBtn.addEventListener('click', closeVideo);
+        
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeVideo();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape" && lightbox.style.display === 'flex') {
+                closeVideo();
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>
